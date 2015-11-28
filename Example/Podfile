@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'SwiftCountryPicker_Example', :exclusive => true do
+  pod "SwiftCountryPicker", :path => "../"
+end
+
+target 'SwiftCountryPicker_Tests', :exclusive => true do
+  pod "SwiftCountryPicker", :path => "../"
+
+  
+end
