@@ -1,0 +1,25 @@
+{
+  "name": "SwiftCountryPicker",
+  "version": "0.1.0",
+  "summary": "A short description of SwiftCountryPicker.",
+  "description": "",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/SwiftCountryPicker",
+  "license": "MIT",
+  "authors": {
+    "Samuel Beek": "ik@samuelbeek.com"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/SwiftCountryPicker.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "SwiftCountryPicker": [
+      "Pod/Assets/*.png"
+    ]
+  }
+}
