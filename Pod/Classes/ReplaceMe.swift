@@ -1,5 +1,0 @@
-
-class CountryPicker : UIPickerView {
-    
-}
-

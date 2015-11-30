@@ -85,7 +85,9 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-SwiftCountryPicker_Example/SwiftCountryPicker.framework"
+  install_framework "Pods-SwiftCountryPicker_Example/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-SwiftCountryPicker_Example/SwiftCountryPicker.framework"
+  install_framework "Pods-SwiftCountryPicker_Example/SwiftyJSON.framework"
 fi

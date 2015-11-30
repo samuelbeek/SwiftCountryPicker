@@ -7,12 +7,22 @@
 //
 
 import UIKit
+import SwiftCountryPicker
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        var textField = UITextField(frame: CGRectMake(0,0,200,50))
+        textField.center = view.center
+        view.addSubview(textField)
+        
+        var countryPicker = CountryPicker(frame: CGRectMake(0,self.view.frame.size.height-216,self.view.frame.size.width, 216))
+        countryPicker.delegate = self
+        textField.inputView = countryPicker
+        
+    
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,3 +32,9 @@ class ViewController: UIViewController {
 
 }
 
+extension ViewController : CountryPickerDelegate {
+    func countryPicker(picker: CountryPicker, didSelectCountry country: Country) {
+        print(country.emoji)
+    }
+
+}
