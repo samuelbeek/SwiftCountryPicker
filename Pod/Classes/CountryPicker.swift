@@ -16,8 +16,8 @@ public protocol CountryPickerDelegate : UIPickerViewDelegate {
 
 public class CountryPicker : UIPickerView {
     
-    var countryData = [Country]()
-    var pickedCountry : Country?
+    private var countryData = [Country]()
+    public var pickedCountry : Country?
     public var countryDelegate : CountryPickerDelegate?
 
     public override init(frame: CGRect) {
@@ -30,7 +30,6 @@ public class CountryPicker : UIPickerView {
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     /**
      Loads content from .json file
@@ -84,7 +83,6 @@ extension CountryPicker : UIPickerViewDataSource {
     }
     
     public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        print(countryData.count)
         return countryData.count
     }
     
@@ -96,9 +94,11 @@ extension CountryPicker : UIPickerViewDataSource {
 
 extension CountryPicker : UIPickerViewDelegate {
     public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        pickedCountry = countryData[row]
         if let countryDelegate = self.countryDelegate {
             countryDelegate.countryPicker(self, didSelectCountry: countryData[row])
         }
     }
+
 }
 
