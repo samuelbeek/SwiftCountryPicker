@@ -1,5 +1,5 @@
 PODS:
-  - SwiftCountryPicker (0.1.0)
+  - SwiftCountryPicker (1.0.0)
 
 DEPENDENCIES:
   - SwiftCountryPicker (from `../`)
@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  SwiftCountryPicker: d4606a0613a8b2ae169bf3d1e7ef09f9528bbbe6
+  SwiftCountryPicker: 18f69fe0301412de373d3d2043fea38a6053ca91
 
 COCOAPODS: 0.39.0

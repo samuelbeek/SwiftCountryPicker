@@ -23,15 +23,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textField = UITextField(frame: CGRectMake(0,0,40,30))
-        view.addSubview(textField)
-        
         // Note: you don't have to set a proper origin for the CountryPicker
         // if you're going to use it as an inputView. It will be positioned at the
         // bottom of the screen by default.
         let countryPicker = CountryPicker(frame: CGRectMake(0,0,self.view.frame.size.width, 216))
         countryPicker.countryDelegate = self
+        
+        
+        
+        textField = UITextField(frame: CGRectMake(0,0,40,30))
+        view.addSubview(textField)
         textField.inputView = countryPicker
+        
+        // Show the country code from NSlocale by default
+        textField.text = countryPicker.pickedCountry?.iso
         
     
     }
