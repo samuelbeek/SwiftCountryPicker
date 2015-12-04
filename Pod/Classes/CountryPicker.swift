@@ -29,7 +29,7 @@ public protocol CountryPickerDelegate : UIPickerViewDelegate {
 }
 
 /** 
- The CountryPicker class uses a custom subclass of UIPickerView to display country names and flags (emoji flags in a slot machine interface. The user can choose a pick a country.
+ The CountryPicker class uses a custom subclass of UIPickerView to display country names and flags (emoji flags) in a slot machine interface. The user can choose a pick a country.
 */
 public class CountryPicker : UIPickerView {
   
