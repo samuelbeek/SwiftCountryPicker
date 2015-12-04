@@ -32,8 +32,8 @@ class ViewController: UIViewController {
         
         
         textField = UITextField(frame: CGRectMake(0,0,40,30))
-        view.addSubview(textField)
         textField.inputView = countryPicker
+        view.addSubview(textField)
         
         // Show the country code from NSlocale by default
         textField.text = countryPicker.pickedCountry?.iso
