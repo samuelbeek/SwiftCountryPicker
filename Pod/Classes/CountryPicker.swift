@@ -1,25 +1,51 @@
 // Made by Samuel Beek (github.com/samuelbeek)
 import SwiftyJSON //      TODO: make sure you don't require SwiftyJSON
 
+
+/**
+    Country object
+    contains a name, iso country code and emoji, all strings.
+*/
 public struct Country {
     
+    /// Name of the country
     public let name : String!
+    
+    /// ISO country code of the country
     public let iso : String!
+    
+    /// Emoji flag of the country
     public let emoji: String!
     
 }
 
+
 public protocol CountryPickerDelegate : UIPickerViewDelegate {
+    
+    /**
+     Called by the CountryPicker when the user selects a country
+     
+     - parameter picker:  An object representing the CounrtyPicker requesting the data.
+     - parameter country: The Selected Country
+     */
     func countryPicker(picker: CountryPicker, didSelectCountry country: Country)
 }
 
-
+/** 
+ The CountryPicker class uses a custom subclass of UIPickerView to display country names and flags (emoji flags in a slot machine interface. The user can choose a pick a country.
+*/
 public class CountryPicker : UIPickerView {
-    
-    private var countryData = [Country]()
+  
+    /// The current picked Country
     public var pickedCountry : Country?
+    
+    /// The delegate for the CountryPicker
     public var countryDelegate : CountryPickerDelegate?
-
+    
+    /// The Content of the CountryPicker
+    private var countryData = [Country]()
+    
+  
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.dataSource = self
@@ -77,7 +103,6 @@ public class CountryPicker : UIPickerView {
 
 extension CountryPicker : UIPickerViewDataSource {
     
-    
     public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return "\(countryData[row].emoji) - \(countryData[row].name)"
     }
@@ -93,6 +118,7 @@ extension CountryPicker : UIPickerViewDataSource {
 }
 
 extension CountryPicker : UIPickerViewDelegate {
+
     public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickedCountry = countryData[row]
         if let countryDelegate = self.countryDelegate {
