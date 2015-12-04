@@ -1,7 +1,5 @@
 PODS:
-  - SwiftCountryPicker (0.1.0):
-    - SwiftyJSON
-  - SwiftyJSON (2.3.1)
+  - SwiftCountryPicker (0.1.0)
 
 DEPENDENCIES:
   - SwiftCountryPicker (from `../`)
@@ -11,7 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  SwiftCountryPicker: 5c791bc56d2ac917da11ba1887927400dfb0e6b4
-  SwiftyJSON: 592b53bee5ef3dd9b3bebc6b9cb7ee35426ae8c3
+  SwiftCountryPicker: d4606a0613a8b2ae169bf3d1e7ef09f9528bbbe6
 
 COCOAPODS: 0.39.0

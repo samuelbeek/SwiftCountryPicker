@@ -21,10 +21,5 @@
     "SwiftCountryPicker": [
       "Pod/Assets/*.json"
     ]
-  },
-  "dependencies": {
-    "SwiftyJSON": [
-
-    ]
   }
 }

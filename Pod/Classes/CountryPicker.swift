@@ -1,7 +1,4 @@
 // Made by Samuel Beek (github.com/samuelbeek)
-import SwiftyJSON //      TODO: make sure you don't require SwiftyJSON
-
-
 /**
     Country object
     contains a name, iso country code and emoji, all strings.
@@ -68,8 +65,8 @@ public class CountryPicker : UIPickerView {
             
             do {
                 let jsonData = try NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
-                let jsonDict = try  NSJSONSerialization.JSONObjectWithData(jsonData, options: .AllowFragments)
-                let json = JSON(jsonDict)
+                let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .AllowFragments)
+
                 var countryCode: String?
  
                 if let local = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
@@ -77,8 +74,21 @@ public class CountryPicker : UIPickerView {
                 }
                 
                 
-                for (_,subJson):(String, JSON) in json {
-                    let country = Country(name: subJson["name"].stringValue, iso: subJson["code"].stringValue, emoji: subJson["emoji"].stringValue)
+                guard let countries = json as? NSArray else {
+                    print("countries is not an array")
+                    return
+                }
+                
+                for subJson in countries{
+                    
+                    guard let name = subJson["name"] as? String, iso = subJson["code"] as? String, emoji = subJson["emoji"] as? String else {
+                        
+                        print("couldn't parse json")
+                        
+                        break
+                    }
+                    
+                    let country = Country(name: name, iso: iso, emoji: emoji)
                     
                     // set current country if it's the local countr y
                     if country.iso == countryCode {
