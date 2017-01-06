@@ -6,13 +6,13 @@
 public struct Country {
     
     /// Name of the country
-    public let name : String!
+    public let name : String
     
     /// ISO country code of the country
-    public let iso : String!
+    public let iso : String
     
     /// Emoji flag of the country
-    public let emoji: String!
+    public let emoji: String
     
 }
 
@@ -42,7 +42,6 @@ open class CountryPicker : UIPickerView {
     /// The Content of the CountryPicker
     fileprivate var countryData = [Country]()
     
-  
     public override init(frame: CGRect) {
         super.init(frame: frame)
         self.dataSource = self
