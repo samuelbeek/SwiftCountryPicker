@@ -40,7 +40,7 @@ open class CountryPicker : UIPickerView {
     open var countryDelegate : CountryPickerDelegate?
     
     /// The Content of the CountryPicker
-    fileprivate var countryData = [Country]()
+    internal var countryData = [Country]()
     
     public override init(frame: CGRect) {
         super.init(frame: frame)
@@ -57,54 +57,54 @@ open class CountryPicker : UIPickerView {
      Loads content from .json file
      */
     fileprivate func loadData() {
-        let bundlePath = Bundle(for: CountryPicker.self).path(forResource: "SwiftCountryPicker", ofType: "bundle")
-        
-        if let path = Bundle(path: bundlePath!)!.path(forResource: "EmojiCountryCodes", ofType: "json")
-        {
-            
-            do {
-                let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-                let json = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments)
+        let bundle = Bundle(for: CountryPicker.self)
+        guard let path = bundle.url(forResource: "EmojiCountryCodes", withExtension: "json") else {
+            print("could not find EmojiCountryCodes.json")
+            return
+        }
 
-                var countryCode: String?
- 
-                if let local = (Locale.current as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String {
-                    countryCode = local
-                }
-                
-                
-                guard let countries = json as? NSArray else {
-                    print("countries is not an array")
-                    return
-                }
-                
-                for subJson in countries{
-                    
-                    guard let subJson = subJson as? [String: String], let name = subJson["name"], let iso = subJson["code"], let emoji = subJson["emoji"] else {
-                        
-                        print("couldn't parse json")
-                        
-                        break
-                    }
-                    
-                    let country = Country(name: name, iso: iso, emoji: emoji)
-                    
-                    // set current country if it's the local countr y
-                    if country.iso == countryCode {
-                        pickedCountry = country
-                    }
-                    
-                    // append country
-                    countryData.append(country)
-                }
-                
-                countryData.sort { $1.name > $0.name }
-                self.reloadAllComponents()
-                
-            } catch {
-                print("error reading file")
-                
+        do {
+            let jsonData = try Data(contentsOf: path, options: .mappedIfSafe)
+            let json = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments)
+
+            var countryCode: String?
+
+            if let local = (Locale.current as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String {
+                countryCode = local
             }
+            
+            
+            guard let countries = json as? NSArray else {
+                print("countries is not an array")
+                return
+            }
+            
+            for subJson in countries{
+                
+                guard let subJson = subJson as? [String: String], let name = subJson["name"], let iso = subJson["code"], let emoji = subJson["emoji"] else {
+                    
+                    print("couldn't parse json")
+                    
+                    break
+                }
+                
+                let country = Country(name: name, iso: iso, emoji: emoji)
+                
+                // set current country if it's the local countr y
+                if country.iso == countryCode {
+                    pickedCountry = country
+                }
+                
+                // append country
+                countryData.append(country)
+            }
+            
+            countryData.sort { $1.name > $0.name }
+            self.reloadAllComponents()
+            
+        } catch {
+            print("error reading file")
+            
         }
 
     }
