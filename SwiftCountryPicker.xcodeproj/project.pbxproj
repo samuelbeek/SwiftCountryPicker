@@ -12,6 +12,7 @@
 		5B301E761E1FE9C600D1B7A4 /* SwiftCountryPicker.h in Headers */ = {isa = PBXBuildFile; fileRef = 5B301E681E1FE9C500D1B7A4 /* SwiftCountryPicker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5B301E801E1FEA0500D1B7A4 /* EmojiCountryCodes.json in Resources */ = {isa = PBXBuildFile; fileRef = 5B301E7F1E1FEA0500D1B7A4 /* EmojiCountryCodes.json */; };
 		5B301E821E1FEA0E00D1B7A4 /* CountryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B301E811E1FEA0E00D1B7A4 /* CountryPicker.swift */; };
+		5B301E841E1FF0F800D1B7A4 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 5B301E831E1FF0F800D1B7A4 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		5B301E751E1FE9C600D1B7A4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5B301E7F1E1FEA0500D1B7A4 /* EmojiCountryCodes.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = EmojiCountryCodes.json; path = Pod/Assets/EmojiCountryCodes.json; sourceTree = SOURCE_ROOT; };
 		5B301E811E1FEA0E00D1B7A4 /* CountryPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CountryPicker.swift; path = Pod/Classes/CountryPicker.swift; sourceTree = SOURCE_ROOT; };
+		5B301E831E1FF0F800D1B7A4 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 		5B301E5B1E1FE9C500D1B7A4 = {
 			isa = PBXGroup;
 			children = (
+				5B301E831E1FF0F800D1B7A4 /* README.md */,
 				5B301E671E1FE9C500D1B7A4 /* SwiftCountryPicker */,
 				5B301E721E1FE9C500D1B7A4 /* SwiftCountryPickerTests */,
 				5B301E661E1FE9C500D1B7A4 /* Products */,
@@ -206,6 +209,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5B301E841E1FF0F800D1B7A4 /* README.md in Sources */,
 				5B301E821E1FEA0E00D1B7A4 /* CountryPicker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

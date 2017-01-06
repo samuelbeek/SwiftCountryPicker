@@ -7,6 +7,8 @@
 [![License](https://img.shields.io/cocoapods/l/SwiftCountryPicker.svg?style=flat)](http://cocoapods.org/pods/SwiftCountryPicker)
 [![Platform](https://img.shields.io/cocoapods/p/SwiftCountryPicker.svg?style=flat)](http://cocoapods.org/pods/SwiftCountryPicker)
 
+
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
@@ -49,6 +51,12 @@ it, simply add the following line to your Podfile:
 ```ruby
 pod "SwiftCountryPicker"
 ```
+
+or install it with Carthage 
+```ruby
+github "samuelbeek/SwiftCountryPicker"
+```
+
 
 Add the following line to the top of the file you want to use the CountryPicker in:
 
