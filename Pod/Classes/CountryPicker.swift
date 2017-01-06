@@ -25,22 +25,22 @@ public protocol CountryPickerDelegate : UIPickerViewDelegate {
      - parameter picker:  An object representing the CounrtyPicker requesting the data.
      - parameter country: The Selected Country
      */
-    func countryPicker(picker: CountryPicker, didSelectCountry country: Country)
+    func countryPicker(_ picker: CountryPicker, didSelectCountry country: Country)
 }
 
 /** 
  The CountryPicker class uses a custom subclass of UIPickerView to display country names and flags (emoji flags) in a slot machine interface. The user can choose a pick a country.
 */
-public class CountryPicker : UIPickerView {
+open class CountryPicker : UIPickerView {
   
     /// The current picked Country
-    public var pickedCountry : Country?
+    open var pickedCountry : Country?
     
     /// The delegate for the CountryPicker
-    public var countryDelegate : CountryPickerDelegate?
+    open var countryDelegate : CountryPickerDelegate?
     
     /// The Content of the CountryPicker
-    private var countryData = [Country]()
+    fileprivate var countryData = [Country]()
     
   
     public override init(frame: CGRect) {
@@ -57,19 +57,19 @@ public class CountryPicker : UIPickerView {
     /**
      Loads content from .json file
      */
-    private func loadData() {
-        let bundlePath = NSBundle(forClass: CountryPicker.self).pathForResource("SwiftCountryPicker", ofType: "bundle")
+    fileprivate func loadData() {
+        let bundlePath = Bundle(for: CountryPicker.self).path(forResource: "SwiftCountryPicker", ofType: "bundle")
         
-        if let path = NSBundle(path: bundlePath!)!.pathForResource("EmojiCountryCodes", ofType: "json")
+        if let path = Bundle(path: bundlePath!)!.path(forResource: "EmojiCountryCodes", ofType: "json")
         {
             
             do {
-                let jsonData = try NSData(contentsOfFile: path, options: .DataReadingMappedIfSafe)
-                let json = try NSJSONSerialization.JSONObjectWithData(jsonData, options: .AllowFragments)
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
+                let json = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments)
 
                 var countryCode: String?
  
-                if let local = NSLocale.currentLocale().objectForKey(NSLocaleCountryCode) as? String {
+                if let local = (Locale.current as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String {
                     countryCode = local
                 }
                 
@@ -81,7 +81,7 @@ public class CountryPicker : UIPickerView {
                 
                 for subJson in countries{
                     
-                    guard let name = subJson["name"] as? String, iso = subJson["code"] as? String, emoji = subJson["emoji"] as? String else {
+                    guard let subJson = subJson as? [String: String], let name = subJson["name"], let iso = subJson["code"], let emoji = subJson["emoji"] else {
                         
                         print("couldn't parse json")
                         
@@ -99,7 +99,7 @@ public class CountryPicker : UIPickerView {
                     countryData.append(country)
                 }
                 
-                countryData.sortInPlace { $1.name > $0.name }
+                countryData.sort { $1.name > $0.name }
                 self.reloadAllComponents()
                 
             } catch {
@@ -113,15 +113,15 @@ public class CountryPicker : UIPickerView {
 
 extension CountryPicker : UIPickerViewDataSource {
     
-    public func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "\(countryData[row].emoji) - \(countryData[row].name)"
+    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return "\(countryData[row].emoji.description) - \(countryData[row].name.description)"
     }
     
-    public func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return countryData.count
     }
     
-    public func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
 
@@ -129,7 +129,7 @@ extension CountryPicker : UIPickerViewDataSource {
 
 extension CountryPicker : UIPickerViewDelegate {
 
-    public func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         pickedCountry = countryData[row]
         if let countryDelegate = self.countryDelegate {
             countryDelegate.countryPicker(self, didSelectCountry: countryData[row])
